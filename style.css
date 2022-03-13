@@ -1,0 +1,51 @@
+/* General styling */
+
+* {
+  box-sizing: border-box;
+}
+
+body .container {
+  display: grid;
+  grid-template-columns: repeat(12, auto);
+  grid-template-rows: repeat(12, auto);
+}
+
+header {
+  grid-column: 1 / 13;
+  grid-row: 1 / 5;
+}
+
+main {
+  grid-column: 1 / 13;
+  grid-row: 5 / 12;
+}
+
+footer {
+  grid-column: 1 / 13;
+  grid-row: 12 / 13;
+}
+
+/* Header */
+
+header .container {
+  display: flex;
+  flex-direction: column;
+}
+
+header .overline-ribbon {
+  flex: 1;
+}
+
+header .navbar {
+  flex: 4;
+}
+
+header .navbar {
+  display: flex;
+}
+
+/* Main */
+
+main .container {
+  display: grid;
+}
