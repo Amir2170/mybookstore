@@ -2,14 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>FreeBooks</title>
+    <script src="javascript.js" type="text/javascript" async></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&family=Pacifico&display=swap" rel="stylesheet">
+    <title>BookPedia</title>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
     <div class="container">
       <header>
         <div class="container">
-          <div class="overline-ribbon"></div>
+          <div class="overline-ribbon">
+            <a href="#">Link To The Source Code</a>
+          </div>
           <nav class="navbar">
               <div class="utility-bar">
                 <ul class="nav-item-container justify-start">
@@ -30,9 +39,11 @@
                   </li>
                 </ul>
                 <ul class="nav-item-container justify-end">
-                  <li class="nav-item dropdown">
-                    <a href="#">My account</a>
-                    <div class="dropdown-menu myaccount">
+                  <li class="nav-item dropdown account hov-container" data-toggle-id="account-drop">
+                    <img src="svg/account.svg" class="account-svg" alt="" height="22" width="22">
+                    <a href="#" class="hov-elem">My account</a>
+                    <img src="svg/down-arrow.svg" class="arrow-svg" alt="" width="13" height="13">
+                    <div class="dropdown-menu myaccount" id="account-drop" hidden>
                       <a href="#" class="sign-in">Sign In</a>
                       <a href="#" class="create-account">Create An Account</a>
                       <div class="divider"></div>
@@ -43,27 +54,32 @@
                 </ul>
               </div>
               <div class="logo-bar">
-                <a href="#" class="logo-img"></a>
+                <a href="#" class="logo-img">
+                  <img src="svg/book2.svg" alt="" width="70" height="70">
+                </a>
+                <h2><a href="#">BookPedia</a></h2>
                 <form class="searchbar" action="index.html" method="post">
-                  <div class="whole-searchbar">
                     <div class="search">
-                      <input type="text" class="search-input"
+                      <input type="search" class="search-input"
                       placeholder="Search By Book Name">
                     </div>
                     <span>
-                      <button type="button" class="search-button"></button>
+                      <button type="button" class="search-button">
+                        <img src="svg/search.svg" alt="search" height="21" width="19">
+                      </button>
                     </span>
-                  </div>
                 </form>
-                <ul class="cart justify-end">
+                <ul class="nav-item-container saved justify-end hov-container">
                   <li class="nav-item">
-                    <a href="#">Cart</a>
+                    <a href="#"><img src="svg/saved.svg" width="22" height="22"></a>
                   </li>
-                  <li class="nav-item"><!-- For marker on my cart !--></li>
+                  <li class="nav-item">
+                    <a href="#" class="hov-elem">Saved</a>
+                  </li>
                 </ul>
               </div>
               <div class="navbar-content">
-                <ul class="navbar-container">
+                <ul class="nav-item-container navbar-container">
                   <li class="nav-item">
                     <a href="#" class="all-books">All Books</a>
                   </li>
@@ -73,8 +89,11 @@
                   <li class="nav-item">
                     <a href="#" class="Computer Science">Computer Science</a>
                   </li>
-                  <li class="Programming">
+                  <li class="nav-item">
                     <a href="#" class="programming">Programming</a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="biology">biology</a>
                   </li>
                 </ul>
               </div>
