@@ -22,3 +22,15 @@ for(let hoverContainer of hoverContainers) {
 
 
 /* Adding toggling functionality to account arrow */
+/* Note that this code snippet can be used in combination
+   with 'data-toggle-id' attribute to add toggling functionality
+   to any element in DOM */
+
+document.addEventListener('click', function(event) {
+  let container = event.target.closest('[data-toggle-id]');
+  if(!container) return;
+
+  let elem = document.getElementById(container.dataset.toggleId);
+
+  elem.hidden = !elem.hidden;
+});

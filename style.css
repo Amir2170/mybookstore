@@ -149,6 +149,60 @@ header .navbar {
   cursor: pointer;
 }
 
+/* Utility Bar DropDown Menu */
+
+.utility-bar .dropdown { /* This is the parent for dropDown menu */
+  position: relative;
+}
+
+.utility-bar .dropdown-menu {
+  position: absolute;
+  min-width: 3rem;
+  padding: 1rem;
+  font-size: 0.9rem;
+  background-color: rgb(245, 245, 245);
+  z-index: 10;
+  border: 2px solid #04293A;
+  border-radius: 5px;
+}
+
+.dropdown-menu .divider {
+  border-top: 1px solid #04293A;
+  margin: 0.5rem auto 0.5rem auto;
+}
+
+/* This is Sign in key and it's hover state */
+
+.dropdown-menu .sign-in {
+  display: inherit;
+  width: 100%;
+  text-align: center;
+  background-color: #04293A;
+  color: white;
+  padding: 0.3em;
+  margin-bottom: 0.6em;
+}
+
+.dropdown-menu .sign-in:hover {
+  border-bottom: none;
+  background-color: #FE7E6D;
+  color: #04293A;
+}
+
+/*  Create account key */
+
+.dropdown-menu .create-account {
+  display: inherit;
+  width: 100%;
+  font-size: 0.7rem;
+}
+
+/* rest of drop down menu */
+
+.dropdown-menu .usr-books .manage-account {
+  font-size: 0.8rem;
+}
+
 /* Header Logo bar */
 
 .logo-bar {
