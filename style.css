@@ -60,7 +60,8 @@ header a:visited {
 
 header a:focus {
   color: #04293A;
-  outline: 1px dashed #FE7E6D;
+  outline: none;
+  border-bottom: 1px solid #FE7E6D;
 }
 
 header a:hover {
@@ -149,6 +150,10 @@ header .navbar {
   cursor: pointer;
 }
 
+.rotate { /* This class is used to rotate the arrow on MyAccount */
+  transform: rotate(180deg);
+}
+
 /* Utility Bar DropDown Menu */
 
 .utility-bar .dropdown { /* This is the parent for dropDown menu */
@@ -157,13 +162,14 @@ header .navbar {
 
 .utility-bar .dropdown-menu {
   position: absolute;
-  min-width: 3rem;
+  min-width: 12rem;
   padding: 1rem;
   font-size: 0.9rem;
   background-color: rgb(245, 245, 245);
   z-index: 10;
   border: 2px solid #04293A;
   border-radius: 5px;
+  left: -6%;
 }
 
 .dropdown-menu .divider {
@@ -193,14 +199,18 @@ header .navbar {
 
 .dropdown-menu .create-account {
   display: inherit;
+  text-align: center;
   width: 100%;
   font-size: 0.7rem;
 }
 
 /* rest of drop down menu */
 
-.dropdown-menu .usr-books .manage-account {
+.dropdown-menu .usr-books, .dropdown-menu .manage-account {
+  display: inherit;
   font-size: 0.8rem;
+  padding-top: 1rem;
+  width: 100%;
 }
 
 /* Header Logo bar */
@@ -258,6 +268,10 @@ header .navbar {
 
 .searchbar .search-button:hover {
   cursor: pointer;
+}
+
+.search-button:focus { /* Removes weird blue outline from search button when focuesed */
+  outline: none;
 }
 
 .searchbar .search input {

@@ -31,6 +31,9 @@ document.addEventListener('click', function(event) {
   if(!container) return;
 
   let elem = document.getElementById(container.dataset.toggleId);
+  let arrow = document.querySelector('.account .arrow-svg');
 
   elem.hidden = !elem.hidden;
+
+  arrow.classList.toggle('rotate');
 });
