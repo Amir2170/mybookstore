@@ -316,11 +316,17 @@ input[type="search"] {
   border-right: none;
 }
 
+.navbar-content {
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(4, 41, 58, 0.6);
+}
+
 /* Main */
 
 main .container {
   display: grid;
   grid-template-columns: minmax(auto, 1fr) minmax(auto, 2.5fr);
+  grid-template-rows: 1fr 3fr;
   grid-template-areas:
     "quote quote"
     "recommend books";
@@ -338,6 +344,31 @@ main .books {
 
 main aside {
   grid-area: recommend;
+}
+
+/* Main Section Quote */
+
+.quote {
+  display: flex;
+  background-image: url('media/paper.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  border: 5px solid #ECECEC;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.quote-text {
+  font-family: 'Source Serif Pro', serif;
+}
+
+.quote-text .quote-quote {
+  font-size: 2rem;
+}
+
+.quote-text .quote-author {
+  font-size: 1.2rem;
 }
 
 /* Footer */
