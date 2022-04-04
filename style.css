@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+}
+
 html {
   font-family: 'Comfortaa', cursive, sans-serif;
   font-size: 16px;
@@ -37,6 +41,7 @@ a {
   text-decoration: none;
   padding-bottom: 2px;
 }
+
 
 
 /* Header */
@@ -128,7 +133,7 @@ header .navbar {
 /* Header Utility Bar */
 
 .utility-bar .nav-item {
-  border-right: 1px solid #FE7E6D;
+  border-right: 1px solid #051367;
   padding-left: 0.5em;
   padding-right: 0.5em;
 }
@@ -309,7 +314,7 @@ input[type="search"] {
 .navbar-content ul li {
   flex: 1;
   text-align: center;
-  border-right: 1px solid #FE7E6D;
+  border-right: 1px solid #04293A;
 }
 
 .navbar-content ul li:last-child {
@@ -317,11 +322,13 @@ input[type="search"] {
 }
 
 .navbar-content {
-  padding-bottom: 1rem;
+  padding-bottom: 2.5vh;
   border-bottom: 2px solid rgba(4, 41, 58, 0.6);
 }
 
-/* Main */
+/* !!!!!!!!!!!!!!!!!!!!! MAIN !!!!!!!!!!!!!!!!!!!!!!!!! */
+
+/* Main General */
 
 main .container {
   display: grid;
@@ -336,10 +343,11 @@ main .quote {
   grid-area: quote;
 }
 
-main .books {
+main .books .container{
   grid-area: books;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 main aside {
@@ -369,6 +377,153 @@ main aside {
 
 .quote-text .quote-author {
   font-size: 1.2rem;
+}
+
+
+aside h2, .books h2 { /* H2 font style and font size + general styles*/
+  font-family: 'Kalam', cursive;
+  font-size: 3rem;
+  text-align: center;
+  background-color: #ECECEC;
+  color: #04293A;
+  margin: 0;
+  padding: 5vh;
+  padding-left: 0;
+  height: 12%; /* Gave this part using % to make header and their 
+                adjacet container and occupy 100% of their section/aside 
+                and this causes the section and aside to have same height */
+}
+
+/* Aside book recomendation */
+
+.recommend {
+  background-color: rgb(245, 245, 245);
+  border: 4px solid #ECECEC;
+  height: 82vh;
+  height: 88%;
+}
+
+.recommend .book {
+  text-align: center;
+  padding-top: 20%;
+  width: 100%;
+}
+
+.book .book-img {
+  width: 100%;
+}
+
+/* slide show */
+
+.recommend .slideshow-container {
+  height: 100%;
+  position: relative;
+  max-width: 25vw;
+  margin: auto;
+}
+
+.recommend .mySlides {
+  display: none; /* hidden by default */
+}
+
+.recommend .prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 30%;
+  width: auto;
+  color: rgba(0, 0, 0, 0.5);
+  padding: 1vw;
+  font-weight: bold;
+  font-size: 1.1rem;
+  user-select: none;
+  border-radius: 10px;
+}
+
+.recommend .next {
+  right: 0; /* putting next button far right */
+}
+
+.recommend .prev:hover, 
+.recommend  .next:hover { /* Add a grey background on hover */
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+.recommend .prev:active,
+.recommend .next:active {
+  background-color: rgba(0, 0, 0, 1);
+  border: 1px solid rgb(255, 255, 255);
+}
+
+.recommend .book-title {
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-top: 1vh;
+}
+
+.recommend .numbertext {
+  color: #051367;
+  font-size: 0.9rem;
+  padding: 2%;
+}
+
+.recommend .text {
+  color: #04293A;
+  margin-top: 2vh;
+  width: 100%;
+  font-size: 1.1rem;
+  line-height: 2;
+}
+
+.recommend .dot-container { /* to center the dots in their container */
+  text-align: center;
+  width: 100%;
+}
+
+.recommend .dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 7% .5vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.recommend .dot:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.recommend .dot:active {
+  background-color: rgba(0, 0, 0, 1);
+  border: 2px solid rgb(255, 255, 255);
+}
+
+/* Section books */
+
+.books .book-img img {
+  max-height: 20rem;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+.books .book {
+  margin-left: 3vw;
+  margin-right: 2.5vw;
+  margin-bottom: 3vh;
+}
+
+.books .container { /* in order to give some space between books and their header */
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+  border: 4px solid #ECECEC;
+  background-color: rgb(245, 245, 245);
+  height: 88%;
+}
+
+.book .book-title {
+  text-align: center;
 }
 
 /* Footer */
