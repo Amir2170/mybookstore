@@ -552,6 +552,8 @@ aside h2, .books h2 { /* H2 font style and font size + general styles*/
   margin-left: 3vw;
   margin-right: 2.5vw;
   margin-bottom: 3vh;
+  border: 1px solid rgba(4, 41, 58, 0.6);
+  border-radius: 5px;
 }
 
 .books .container { /* in order to give some space between books and their header */
@@ -564,6 +566,7 @@ aside h2, .books h2 { /* H2 font style and font size + general styles*/
 
 .book .book-title {
   text-align: center;
+  margin-bottom: 1%;
 }
 
 /* Add To Favorite key */
@@ -572,7 +575,7 @@ aside h2, .books h2 { /* H2 font style and font size + general styles*/
   position: absolute;
   text-align: center;
   width: 100%;
-  bottom: 8.5%;
+  bottom: 15.5%;
   padding: 5%;
   background-color: #051367;
   color: white;
@@ -604,19 +607,31 @@ aside h2, .books h2 { /* H2 font style and font size + general styles*/
   box-shadow: inset 0 0.1rem 0.3rem  rgb(0, 0, 0);
 }
 
+/* Book rating system */
+
+.book .book-rating {
+  margin-bottom: 1%;
+  text-align: center;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.book-rating .checked {
+  color: orange;
+}
 
 /* Footer */
 
 footer {
   background-color: #ECECEC;
-  height: 20vh;
   text-align: center;
+  border-top: 2px solid rgba(4, 41, 58, 0.6);
 }
 
 footer .legal {
   list-style-type: none;
   display: flex;
-  margin-top: 5vh;
+  margin-top: 8vh;
 }
 
 footer .legal li {
@@ -626,8 +641,9 @@ footer .legal li {
 
 footer .ft-cpright {
   margin-top: 5vh;
+  margin-bottom: 8vh;
 }
 
 footer .ft-cpright .copyright {
-  font-weight: bold;
+  font-size: 0.9rem;
 }

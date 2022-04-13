@@ -73,3 +73,48 @@ function showSlides(n) {
 }
  
 
+
+// Rating System For Books
+
+let books = Array.from(document.querySelectorAll('.book'));
+
+/* Here i add an event listener on each book in order to 
+   differenciate between each book rating otherwise ratings 
+   would have impacts on one another 
+*/
+
+books.map((book) => {
+  book.addEventListener('click', function(event) {
+    if(event.target.classList.contains('fa-star')) {
+      let ratingStars = Array.from(book.querySelectorAll('.book-rating .fa-star'));
+      executeRating(ratingStars);
+      }
+  });
+});
+/*
+   recieves an array of stars and add click handler to each 
+   array member when a member is clicked get it's index and 
+   check if it's active or inactive and do the appropriate action.
+ */
+function executeRating(stars) { 
+  // with stars array length being here loop shouldn't 
+  // check it every time it iterates
+  let starLength = stars.length;  
+  let i;
+
+  stars.map((star) => {
+    star.addEventListener('click', function(event) {
+      i = stars.indexOf(star);
+
+      if(star.classList.contains('checked')) {
+        for(i; i < starLength; i++) {
+          stars[i].classList.remove('checked');
+        }
+      } else {
+        for(i; i >= 0; i--) {
+          stars[i].classList.add('checked');
+        }
+      };
+    });
+  });
+}
