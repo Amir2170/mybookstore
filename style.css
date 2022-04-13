@@ -42,6 +42,31 @@ a {
   padding-bottom: 2px;
 }
 
+/* Links */
+
+a:link {
+  color: #04293A;
+}
+
+a:visited {
+  color: #712B75;
+}
+
+a:focus {
+  color: #04293A;
+  outline: none;
+  border-bottom: 1px solid #FE7E6D;
+}
+
+a:hover {
+  color: #FE7E6D;
+  border-bottom: 1px solid #FE7E6D;
+}
+
+a:active {
+  color: #04293A;
+}
+
 
 
 /* Header */
@@ -53,30 +78,6 @@ header .container {
   color: #04293A;
 }
 
-/* Styling Header Links */
-
-header a:link {
-  color: #04293A;
-}
-
-header a:visited {
-  color: #712B75;
-}
-
-header a:focus {
-  color: #04293A;
-  outline: none;
-  border-bottom: 1px solid #FE7E6D;
-}
-
-header a:hover {
-  color: #FE7E6D;
-  border-bottom: 1px solid #FE7E6D;
-}
-
-header a:active {
-  color: #04293A;
-}
 
 /*
   For elements with '.hover-elem' that should be colored
@@ -447,6 +448,7 @@ aside h2, .books h2 { /* H2 font style and font size + general styles*/
 .recommend  .next:hover { /* Add a grey background on hover */
   color: white;
   background-color: rgba(0, 0, 0, 0.5);
+  border-bottom: none; /* in order to disable links bottom border on hover */
 }
 
 
@@ -476,12 +478,23 @@ aside h2, .books h2 { /* H2 font style and font size + general styles*/
   line-height: 2;
 }
 
+.recommend .book-img img {
+  width: 70%;
+  height: 70%;
+  cursor: pointer;
+}
+
 .recommend .dot-container { /* to center the dots in their container */
   text-align: center;
   width: 100%;
 }
 
-.recommend .dot {
+/* There is a reason i put active class after dot class and it 
+   is because of specificity so keep this order it's IMPORTANT 
+   although i could use '!important' but it's considered bad 
+   practise.
+*/
+.dot { 
   cursor: pointer;
   height: 15px;
   width: 15px;
@@ -491,24 +504,51 @@ aside h2, .books h2 { /* H2 font style and font size + general styles*/
   display: inline-block;
 }
 
+.active { /* For When a thumbnail dot get its corresponding image */
+  background-color: rgba(0, 0, 0, 1); 
+}
+
 .recommend .dot:hover {
   background-color: rgba(0, 0, 0, 0.8);
 }
+
 
 .recommend .dot:active {
   background-color: rgba(0, 0, 0, 1);
   border: 2px solid rgb(255, 255, 255);
 }
 
+/* Fading Animation for slideshow */
+
+.fade { 
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@keyframes fade {
+  from {
+    opacity: .4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* Section books */
 
+.books .book-img a:hover { /* removing border button when hovering over a book image */
+  border-bottom: none;
+}
+
 .books .book-img img {
-  max-height: 20rem;
+  height: 20rem;
   max-width: 100%;
   object-fit: cover;
+  cursor: pointer;
 }
 
 .books .book {
+  position: relative;
   margin-left: 3vw;
   margin-right: 2.5vw;
   margin-bottom: 3vh;
@@ -526,12 +566,68 @@ aside h2, .books h2 { /* H2 font style and font size + general styles*/
   text-align: center;
 }
 
+/* Add To Favorite key */
+
+.book .add {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  bottom: 8.5%;
+  padding: 5%;
+  background-color: #051367;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.25s ease-out;
+}
+
+.book:hover .add {
+  opacity: 1;
+}
+
+
+.add:visited {
+  border-bottom: none;
+}
+
+.add:focus {
+  border-bottom: none;
+}
+
+.add:hover {
+  border-bottom: none;
+  background-color: #ECECEC;
+  color: rgb(0, 0, 0);
+}
+
+.add:active {
+  color: #04293A;
+  box-shadow: inset 0 0.1rem 0.3rem  rgb(0, 0, 0);
+}
+
+
 /* Footer */
 
-footer .ft-legal {
-  display: flex;
+footer {
+  background-color: #ECECEC;
+  height: 20vh;
+  text-align: center;
 }
 
 footer .legal {
+  list-style-type: none;
   display: flex;
+  margin-top: 5vh;
+}
+
+footer .legal li {
+  flex: 1;
+  font-size: 1.1rem;
+}
+
+footer .ft-cpright {
+  margin-top: 5vh;
+}
+
+footer .ft-cpright .copyright {
+  font-weight: bold;
 }
