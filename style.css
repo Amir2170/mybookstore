@@ -637,6 +637,11 @@ footer .legal {
 footer .legal li {
   flex: 1;
   font-size: 1.1rem;
+  border-right: 1px solid #051367;
+}
+
+footer .legal li:last-child {
+  border-right: none;
 }
 
 footer .ft-cpright {
