@@ -88,6 +88,10 @@ books.map((book) => {
     if(event.target.classList.contains('fa-star')) {
       let ratingStars = Array.from(book.querySelectorAll('.book-rating .fa-star'));
       executeRating(ratingStars);
+      /* And finally click the target so it triggers handlers on it
+        otherwise it would need another click to trigger it when the 
+        page first load and it would be very annoying */  
+      event.target.click(); 
       }
   });
 });
