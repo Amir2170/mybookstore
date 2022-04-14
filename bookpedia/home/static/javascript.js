@@ -90,15 +90,15 @@ books.map((book) => {
       executeRating(ratingStars);
       /* And finally click the target so it triggers handlers on it
         otherwise it would need another click to trigger it when the 
-        page first load and it would be very annoying */  
+        page first loads...very annoying experience if you ask me!*/  
       event.target.click(); 
-      }
+    }
   });
 });
 /*
    recieves an array of stars and add click handler to each 
-   array member when a member is clicked get it's index and 
-   check if it's active or inactive and do the appropriate action.
+   array member, get it's index and check if it's active or inactive 
+   and do the appropriate action.
  */
 function executeRating(stars) { 
   // with stars array length being here loop shouldn't 
