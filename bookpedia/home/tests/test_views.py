@@ -1,9 +1,8 @@
+from django.test import TestCase
 from urllib import response
 from xmlrpc import client
-from django.test import TestCase
 from matplotlib.pyplot import cla
 from django.urls import reverse
-
 
 
 class HomeViewtest(TestCase):
