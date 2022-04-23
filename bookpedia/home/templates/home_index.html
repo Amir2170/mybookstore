@@ -1,0 +1,69 @@
+{% extends 'home.html' %}
+{% load i18n %} 
+{% load list_index %}
+
+
+
+<!--CATEGORY SECTION-->
+
+{% block categories%}
+    {% for category in categories %}
+        <li class="nav-item">
+            <a href="#" class="all-books">{{ category.name|title }}</a>
+        </li>
+    {% endfor %}
+{% endblock categories%}
+
+
+<!--BOOKS SECTION-->
+
+{% block books %}
+    {% for book in books %}
+        <div class="book">
+            <div class="book-img">
+                <a href="#" class="add">{% translate "ADD TO FAVORITE" %}</a>
+                <img src="{{ book.image.url }}" alt="{{ book.title|title }}">
+            </div>
+            <div class="book-title">
+                <a href="#">{{ book.title|title }}</a>
+            </div>
+            <div class="book-rating">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star "></span>
+                <span class="fa fa-star "></span>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock books%}
+
+<!--BOOK RECOMMENDING SLIDESHOW SECTION-->
+
+{% block book_recommending %}
+    {% for book in recommended_books %}
+        <div class="book mySlides fade">
+            <div class="numbertext">
+                {{ book|index:recommended_books }} / {{ recommended_books|length }}
+            </div>
+            <div class="book-img">
+                <a href="#"></a> <!-- Link to the Book details -->
+                <img src="{{ book.image.url }}">
+            </div>
+            <div class="book-title">
+                <a href="#">{{ book.title|title }}</a>
+            </div>
+            <div class="text">
+                {{ book.text|title }}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock book_recommending %}
+
+<!--BOOK RECOMMENDING SLIDESHOW DOT SECTION-->
+
+{% block book_recommending_dot %}
+    {% for book in recommended_books %}
+        <span class="dot" onclick="currentSlide({{ book|index:recommended_books }})"></span>
+    {% endfor %}
+{% endblock book_recommending_dot%}

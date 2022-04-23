@@ -430,7 +430,7 @@ aside h2, .books h2 { /* H2 font style and font size + general styles*/
 .recommend .prev, .next {
   cursor: pointer;
   position: absolute;
-  top: 30%;
+  top: 25%;
   width: auto;
   color: rgba(0, 0, 0, 0.5);
   padding: 1vw;
@@ -554,6 +554,7 @@ aside h2, .books h2 { /* H2 font style and font size + general styles*/
   margin-bottom: 3vh;
   border: 1px solid rgba(4, 41, 58, 0.6);
   border-radius: 5px;
+  max-height: 382px;
 }
 
 .books .container { /* in order to give some space between books and their header */
@@ -561,7 +562,7 @@ aside h2, .books h2 { /* H2 font style and font size + general styles*/
   padding-bottom: 3vh;
   border: 4px solid #ECECEC;
   background-color: rgb(245, 245, 245);
-  height: 88%;
+  height: 88%; 
 }
 
 .book .book-title {
@@ -610,7 +611,7 @@ aside h2, .books h2 { /* H2 font style and font size + general styles*/
 /* Book rating system */
 
 .book .book-rating {
-  margin-bottom: 1%;
+  margin-bottom: 2%;
   text-align: center;
   cursor: pointer;
   font-size: 1.1rem;

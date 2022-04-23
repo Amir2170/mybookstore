@@ -49,4 +49,27 @@ class BookModelTest(TestCase):
         
         self.assertEqual(str(book), 'book')
     
+
+
+class CategoryModelTest(TestCase):
+
+    def setUp(self):
+        self.category = Category.objects.create(name="my category")
+
+
+    def test_model_string_representation(self):
+        self.assertEqual(str(self.category), "my category")
+
+
+    def test_slug_field_is_created_from_name(self):
+        self.assertEqual(self.category.slug, 'my-category')
+
     
+    # i'm gonna change the object name here, hence putting this test last
+    def test_if_slug_is_only_created_upon_creating_object(self): 
+        self.category.name = 'your category'
+        self.category.save()
+
+        self.assertEqual(self.category.name, 'your category')
+        self.assertEqual(self.category.slug, 'my-category')
+
