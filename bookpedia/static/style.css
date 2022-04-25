@@ -613,7 +613,6 @@ aside h2, .books h2 { /* H2 font style and font size + general styles*/
 .book .book-rating {
   margin-bottom: 2%;
   text-align: center;
-  cursor: pointer;
   font-size: 1.1rem;
 }
 

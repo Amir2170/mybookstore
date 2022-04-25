@@ -1,23 +1,30 @@
 from unicodedata import category, name
 from django.test import TestCase
 from matplotlib.pyplot import cla, text, title
+from django.contrib.auth import get_user_model
 
 #MY IMPORTS
 from home.models import Book, Category
+from rating.models import Review
+
+# accessing user model
+User = get_user_model()
 
 
 class BookModelTest(TestCase):
 
-    def test_saving_and_retrieving_books(self):
-        book1 = Book.objects.create(
+    def setUp(self):
+        self.book1 = Book.objects.create(
             title="book1",
             text="this is book1"
         )
-        book2 = Book.objects.create(
+        self.book2 = Book.objects.create(
             title="book2",
             text="this is book2"
         )
+        
 
+    def test_saving_and_retrieving_books(self):
         saved_books = Book.objects.all()
 
         self.assertEqual(saved_books.count(), 2)
@@ -27,27 +34,40 @@ class BookModelTest(TestCase):
 
 
     def test_books_can_have_categories(self):
-        book = Book.objects.create(
-            title="book"
-        )
-        book.categories.create(name="category1")
-        book.categories.create(name="category2")
+        self.book1.categories.create(name="category1")
+        self.book1.categories.create(name="category2")
         
-        book_categories = book.categories.all()
+        book_categories = self.book1.categories.all()
 
         self.assertEqual(book_categories.count(), 2)
 
 
     def test_book_model_generate_slug_on_save(self):
-        book = Book.objects.create(title="book title")
-
-        self.assertEqual(book.slug, 'book-title')
+        self.assertEqual(self.book1.slug, 'book1')
     
 
     def test_book_object_string_representation(self):
-        book = Book.objects.create(title="book")
+        self.assertEqual(str(self.book1), 'book1')
+
+    
+    def test_book_model_average_review_function(self):
+        user = User.objects.create()
+        Review.objects.create(
+            rate=3,
+            book=self.book1,
+            user=user,
+        )
+        Review.objects.create(
+            rate=5,
+            book=self.book1,
+            user=user
+        )
+
+        self.assertEqual(
+            self.book1.average_review,
+            4
+        )
         
-        self.assertEqual(str(book), 'book')
     
 
 

@@ -4,6 +4,7 @@
     '.hov-container' class.
 */
 
+
 let hoverContainers = document.querySelectorAll('.hov-container');
 
 for(let hoverContainer of hoverContainers) {
@@ -76,13 +77,15 @@ function showSlides(n) {
 
 // Rating System For Books
 
+ 
+
 let books = Array.from(document.querySelectorAll('.book'));
 
 /* Here i add an event listener on each book in order to 
    differenciate between each book rating otherwise ratings 
    would have impacts on one another 
 */
-
+/*
 books.map((book) => {
   book.addEventListener('click', function(event) {
     if(event.target.classList.contains('fa-star')) {
@@ -90,7 +93,7 @@ books.map((book) => {
       executeRating(ratingStars);
       /* And finally click the target so it triggers handlers on it
         otherwise it would need another click to trigger it when the 
-        page first loads...very annoying experience if you ask me!*/  
+        page first loads...very annoying experience if you ask me!  
       event.target.click(); 
     }
   });
@@ -99,7 +102,7 @@ books.map((book) => {
    recieves an array of stars and add click handler to each 
    array member, get it's index and check if it's active or inactive 
    and do the appropriate action.
- */
+ 
 function executeRating(stars) { 
   // with stars array length being here loop shouldn't 
   // check it every time it iterates
@@ -122,3 +125,6 @@ function executeRating(stars) {
     });
   });
 }
+
+*/
+

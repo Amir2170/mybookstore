@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     #Local
     'home',
+    'rating',
     
     #Default
     'django.contrib.admin',

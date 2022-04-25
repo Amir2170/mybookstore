@@ -1,9 +1,16 @@
+from audioop import avg
 from email.policy import default
 from unicodedata import category, name
 from django.db import models
 from matplotlib.pyplot import text, title
 from django.core.validators import MaxValueValidator, MinValueValidator #For validating book score
 from django.template.defaultfilters import slugify #To slugify title
+from django.db.models import Avg
+
+
+# MY IMPORTS
+from rating.models import Review
+
 
 
 class Category(models.Model):
@@ -63,9 +70,21 @@ class Book(models.Model):
     author = models.CharField(max_length=100, default="")
     recommend = models.BooleanField(default=False)
 
+    @property
+    def average_review(self):
+        reviews = Review.objects.filter(book=self).aggregate(avg_rate=Avg('rate'))
+        avg = 0
+        
+        if reviews['avg_rate'] is not None:
+            avg = float(reviews['avg_rate'])
+        
+        return avg
+
+
     def save(self, *args, **kwargs): # Overriding save method to generate 
         self.slug = slugify(self.title) # an editable slug on saving
         super().save(*args, **kwargs) 
+
 
     def __str__(self):
         return self.title
