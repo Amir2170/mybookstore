@@ -113,3 +113,98 @@ class HomeViewtest(TestCase):
             categories,
             ordered=False
         )
+
+
+class BookDetailView(TestCase):
+
+    def setUp(self):
+        photo = tempfile.NamedTemporaryFile(suffix=".jpg").name # Create an image as a temporary file
+        self.book1 = Book.objects.create(
+            title="book number 1",
+            image=photo
+        )
+        self.book2 = Book.objects.create(
+            title="book number two",
+            image=photo
+        )
+
+
+    def test_status_code_for_url_dispatcher(self):
+        response = self.client.get(
+            reverse(
+                'home:book-detail',
+                args=[self.book1.slug]
+            )
+        )
+
+        self.assertEqual(response.status_code, 200)
+
+    
+    def test_detail_view_context(self):
+        category1 = Category.objects.create(name='category1')
+        category2 = Category.objects.create(name='category2')
+        category3 = Category.objects.create(name='category3')
+
+        self.book1.categories.set([category1, category2, category3])
+        # the logic is that i add the same categories as my main book 
+        # to this book as well and i check if only this book exists in 
+        # context similar books if so then recommeding wroks otherwsie not
+        # because picking category is completely random i had no other choice
+        self.book2.categories.set([category1, category2, category3])
+
+        # i did this in order to campare a query set version of this to 
+        # response similar_books context value which is a queryset
+        book2_query = Book.objects.filter(title='book number two') 
+
+        response = self.client.get(
+            reverse('home:book-detail', args=[self.book1.slug])
+        )
+
+        self.assertEqual(response.context['book'], self.book1)
+        self.assertQuerysetEqual(
+            response.context['similar_books'],
+            book2_query
+        )
+
+        # here i dissociate all relations of my second book to simliar
+        # categories in order to test whether context similar books will
+        # be empty or not
+        self.book2.categories.clear()
+
+        response = self.client.get(
+            reverse('home:book-detail', args=[self.book1.slug])
+        )
+
+        self.assertFalse(
+            response.context['similar_books']
+        )
+
+    
+    def test_recommending_view_doesn_not_send_more_than_five_books(self):
+        category1 = Category.objects.create(name='category1')
+        category2 = Category.objects.create(name='category2')
+        category3 = Category.objects.create(name='category3')
+
+        self.book1.categories.set([category1, category2, category3])
+
+        # Creating 10 different books with same categories
+        photo = tempfile.NamedTemporaryFile(suffix=".jpg").name # Create an image as a temporary file
+        for i in range(10):
+            book = Book.objects.create(
+                title=f'book {i}',
+                image=photo,
+            )
+            book.categories.set([category1, category2, category3])
+
+        response = self.client.get(
+            reverse('home:book-detail', args=[self.book1.slug])
+        )
+
+        books_to_exclude = ['book number 1','book number two'] # Titles of the books to exclude
+        similar_books = Book.objects.exclude(title__in=books_to_exclude)[:5]
+
+        self.assertQuerysetEqual(
+            response.context['similar_books'],
+            similar_books,
+            ordered=False
+        )

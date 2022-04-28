@@ -1,0 +1,100 @@
+
+/* Book Details */
+
+.books .container {
+    flex-flow: column;
+}
+
+.container .book-info {
+    flex: 2;
+    display: flex;
+}
+
+.book-info img {
+    max-height: 70%;
+    max-width: 35%;
+    flex: 1;
+    margin: 3.5%;
+    margin-top: 7%;
+    border: 2px solid rgba(4, 41, 58, 0.6);
+    border-radius: 5px;
+}
+
+.book-info .info {
+    flex: 2;
+    margin: 9% 3.5% 3.5% 1%;
+    list-style-type: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #04293A;
+}
+
+.book-info .info li {
+    margin: 3%;
+}
+
+/* Because this app uses uses English as main language
+   there is a padding right to this part */
+.info .purple{ 
+    padding-right: 2%;
+    color: #4D4C7D;
+}
+
+.book-info .info .text {
+    line-height: 2;
+}
+
+.info .rate p {
+    margin-top: 4%;
+}
+
+.book-info .info .rate {
+    text-align: center;
+    margin-top: 10%;
+    cursor: pointer;
+}
+
+.book-info .info .download {
+    text-align: center;
+    margin-top: 5%;
+    font-size: 1.5rem;
+    padding: 2.5% 5%;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+}
+
+.info .download a:link {
+    background-color: #051367;
+}
+
+.info .download a:visited {
+    border-bottom: none;
+}
+
+.info .download a:focus {
+    border: 2px dotted rgb(255, 255, 255);
+}
+
+.info .download a:hover {
+    border-bottom: none;
+    background-color: #ECECEC;
+    color: rgb(0, 0, 0);
+}
+
+.info .download a:active {
+    color: #04293A;
+    box-shadow: inset 0 0.1rem 0.3rem rgba(0, 0, 0);
+}
+
+/* Explore More aka Similar books */
+
+.recommend .slideshow-container{
+    position: relative;
+}
+
+.empty {
+    position: absolute;
+    text-align: center;
+    font-size: 1.4rem;
+    top: 45%;
+}

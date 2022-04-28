@@ -1,6 +1,7 @@
 import imp
 from django.urls import path
 
+# MY IMPORTS
 from . import views
 
 
@@ -12,5 +13,6 @@ app_name= 'home'
 
 urlpatterns = [
     path('', views.home, name='index'),
+    path('books/<slug:slug>/', views.book_detail, name='book-detail'),
 ]
 

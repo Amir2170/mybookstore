@@ -1,0 +1,75 @@
+{% extends 'home.html' %}
+{% load i18n %}
+{% load static %}
+{% load list_index %}
+
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'book_detail.css' %}">
+{% endblock extra_head%}
+
+
+{% block book_detail %}
+    <h2>Book Details</h2>
+    <div class="container">
+        <div class="book-info">
+            <img src={{ book.image.url }} alt={{ book.title|title }}>
+            <ul class="info">
+                <li class="title"><span class="purple">Title: </span>{{ book.title|title }}</li>
+                <li class="lang"><span class="purple">Language: </span>{{ book.get_language_display|title }}</li>
+                <li class="author"><span  class="purple">Author: </span>{{ book.author|title }}</li>
+                <li class="text" class="purple">{{ book.text|title }}</li>
+                <li class="rate">
+                    <p class="purple">Have You Read This Book?</p>
+                    <div class="book-rating">
+                        <span class="fa fa-star fa-3x {% if book.average_review > 0 %}checked{% endif %}"></span>
+                        <span class="fa fa-star fa-3x {% if book.average_review > 1 %}checked{% endif %}"></span>
+                        <span class="fa fa-star fa-3x {% if book.average_review > 2 %}checked{% endif %}"></span>
+                        <span class="fa fa-star fa-3x {% if book.average_review > 3 %}checked{% endif %}"></span>
+                        <span class="fa fa-star fa-3x {% if book.average_review > 4 %}checked{% endif %}"></span>
+                    </div>
+                </li>
+                <li class="download">
+                    <a href="#" class="download">Download</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock book_detail%}
+
+{% block similar_books %}
+    <h2>Smilar Books</h2>
+    <section class="recommend">
+        <div class="slideshow-container">
+            {% for book in similar_books %}
+                <div class="book mySlides fade">
+                    <div class="numbertext">
+                        {{ book|index:similar_books }} / {{ similar_books|length }}
+                    </div>
+                    <div class="book-img">
+                        <a href="#"></a> <!-- Link to the Book details -->
+                        <img src="{{ book.image.url }}">
+                    </div>
+                    <div class="book-title">
+                        <a href="#">{{ book.title|title }}</a>
+                    </div>
+                    <div class="text">
+                        {{ book.text|title }}
+                    </div>
+                </div>
+            {% empty %} <!--no similar books case-->
+                <p class="empty">Sorry, There Isn't Any Similar Books Available.</p>
+            {% endfor %}
+            
+            {% if similar_books %} <!--In case of no similar books no need to show these-->
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+                <div class="dot-container">
+                    {% for book in similar_books %}
+                        <span class="dot" onclick="currentSlide({{ book|index:similar_books }})"></span>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </section>
+{% endblock similar_books %}

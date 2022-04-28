@@ -2,6 +2,7 @@ from unicodedata import category, name
 from django.test import TestCase
 from matplotlib.pyplot import cla, text, title
 from django.contrib.auth import get_user_model
+from django.urls import reverse
 
 #MY IMPORTS
 from home.models import Book, Category
@@ -50,6 +51,14 @@ class BookModelTest(TestCase):
         self.assertEqual(str(self.book1), 'book1')
 
     
+    # Testing get_absolute_url just to make sure it works
+    def test_book_model_get_absolute_url(self):
+        self.assertEqual(
+            self.book1.get_absolute_url(),
+            reverse('home:book-detail', args=[self.book1.slug])
+        )
+
+
     def test_book_model_average_review_function(self):
         user = User.objects.create()
         Review.objects.create(
@@ -67,6 +76,7 @@ class BookModelTest(TestCase):
             self.book1.average_review,
             4
         )
+
         
     
 
@@ -92,4 +102,3 @@ class CategoryModelTest(TestCase):
 
         self.assertEqual(self.category.name, 'your category')
         self.assertEqual(self.category.slug, 'my-category')
-

@@ -26,7 +26,7 @@
                 <img src="{{ book.image.url }}" alt="{{ book.title|title }}">
             </div>
             <div class="book-title">
-                <a href="#">{{ book.title|title }}</a>
+                <a href="{% url 'home:book-detail' book.slug %}">{{ book.title|title }}</a>
             </div>
             <div class="book-rating">
                 <span class="fa fa-star {% if book.average_review > 0 %}checked{% endif %}"></span>
@@ -48,11 +48,11 @@
                 {{ book|index:recommended_books }} / {{ recommended_books|length }}
             </div>
             <div class="book-img">
-                <a href="#"></a> <!-- Link to the Book details -->
+                <a href="{% url 'home:book-detail' book.slug %}"></a> <!-- Link to the Book details -->
                 <img src="{{ book.image.url }}">
             </div>
             <div class="book-title">
-                <a href="#">{{ book.title|title }}</a>
+                <a href="{% url 'home:book-detail' book.slug %}">{{ book.title|title }}</a>
             </div>
             <div class="text">
                 {{ book.text|title }}

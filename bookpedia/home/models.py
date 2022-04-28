@@ -6,6 +6,7 @@ from matplotlib.pyplot import text, title
 from django.core.validators import MaxValueValidator, MinValueValidator #For validating book score
 from django.template.defaultfilters import slugify #To slugify title
 from django.db.models import Avg
+from django.urls import reverse
 
 
 # MY IMPORTS
@@ -20,15 +21,25 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural = 'Categories'
 
+    
+    # Used this function in order to generate right url
+    # from models instance straight
+
     def __str__(self):
         return self.name
     
+
     def save(self, *args, **kwargs):
         if not self.id:     # Slugify only once when object is created, don't want broken links
             self.slug = slugify(self.name)
 
         super().save(*args, **kwargs)
 
+
+    def get_absolute_url(self): # *************************************** TO BE TESTED
+        return reverse("category-detail", kwargs={"slug": self.slug})
+    
+    
 
 
 class Book(models.Model):
@@ -70,11 +81,15 @@ class Book(models.Model):
     author = models.CharField(max_length=100, default="")
     recommend = models.BooleanField(default=False)
 
+
+    # Used this function in order to generate right url
+    # from models instance straight
+
     @property
     def average_review(self):
         reviews = Review.objects.filter(book=self).aggregate(avg_rate=Avg('rate'))
         avg = 0
-        
+    
         if reviews['avg_rate'] is not None:
             avg = float(reviews['avg_rate'])
         
@@ -88,4 +103,9 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+    
+    def get_absolute_url(self):
+        return reverse("home:book-detail", kwargs={"slug": self.slug})
+    
     

@@ -1,6 +1,7 @@
 from cgitb import html
 from unicodedata import category
 from django.shortcuts import render
+import random
 
 # MY IMPORTS
 from home.models import Book, Category
@@ -25,3 +26,31 @@ def home(request):
     })
 
 
+# Book Details
+
+def book_detail(request, slug):
+    book = Book.objects.get(slug=slug)
+    book_categories = Category.objects.filter(books=book)
+
+    # Getting a random category from books categories
+    # if there is not any categories related to the 
+    # specified book return None instead so we can
+    # use an if statement in our templates for testing  
+    # its existent
+    similar_books = None  
+    # random_category
+    if book_categories.exists():
+        rand_category = random.choice(book_categories)
+        # filter books according to random cat and exclude the book itself
+        similar_books = Book.objects.filter(categories=rand_category).exclude(title=book.title)[:5]
+     
+    return render(request, 'book_detail.html',{
+        'book': book,
+        'similar_books': similar_books,
+    })
+
+
+# Category 
+
+def book_category(request, slug):
+    pass
