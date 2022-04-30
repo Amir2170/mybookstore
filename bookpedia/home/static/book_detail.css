@@ -98,3 +98,11 @@
     font-size: 1.4rem;
     top: 45%;
 }
+
+
+/* Rating system */
+
+.book-rating button {
+    border: none;
+    background-color: inherit;
+}

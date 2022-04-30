@@ -4,7 +4,6 @@
     '.hov-container' class.
 */
 
-
 let hoverContainers = document.querySelectorAll('.hov-container');
 
 for(let hoverContainer of hoverContainers) {
@@ -24,8 +23,8 @@ for(let hoverContainer of hoverContainers) {
 
 /* Adding toggling functionality to account arrow */
 /* Note that this code snippet can be used in combination
-   with 'data-toggle-id' attribute to add toggling functionality
-   to any element in DOM */
+  with 'data-toggle-id' attribute to add toggling functionality
+  to any element in DOM */
 
 document.addEventListener('click', function(event) {
   let container = event.target.closest('[data-toggle-id]');
@@ -72,59 +71,60 @@ function showSlides(n) {
   dots[slideIndex - 1].classList.add('active');
   slides[slideIndex - 1].style.display = "block";
 }
- 
+
 
 
 // Rating System For Books
 
- 
 
-let books = Array.from(document.querySelectorAll('.book'));
 
-/* Here i add an event listener on each book in order to 
-   differenciate between each book rating otherwise ratings 
-   would have impacts on one another 
-*/
-/*
-books.map((book) => {
-  book.addEventListener('click', function(event) {
-    if(event.target.classList.contains('fa-star')) {
-      let ratingStars = Array.from(book.querySelectorAll('.book-rating .fa-star'));
-      executeRating(ratingStars);
-      /* And finally click the target so it triggers handlers on it
-        otherwise it would need another click to trigger it when the 
-        page first loads...very annoying experience if you ask me!  
-      event.target.click(); 
-    }
-  });
-});
-/*
-   recieves an array of stars and add click handler to each 
-   array member, get it's index and check if it's active or inactive 
-   and do the appropriate action.
- 
-function executeRating(stars) { 
-  // with stars array length being here loop shouldn't 
-  // check it every time it iterates
-  let starLength = stars.length;  
+let ratingStars = Array.from(document.querySelectorAll('.book-info .book-rating .fa-star'));
+
+if(ratingStars.length != 0) {
+  executeRating(ratingStars);
+};
+
+
+function executeRating(stars) {
+  let starsLength = stars.length;
   let i;
 
   stars.map((star) => {
     star.addEventListener('click', function(event) {
-      i = stars.indexOf(star);
 
-      if(star.classList.contains('checked')) {
-        for(i; i < starLength; i++) {
-          stars[i].classList.remove('checked');
+      Swal.fire({
+        title: "Are You Sure ?",
+        text: "You Won't Be Able To Rate This Book Again!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, Rate This Book.',
+        background: '#f5f5f5',
+      }).then((result) => {
+        if(result.isConfirmed) {
+          i = stars.indexOf(star)
+
+
+          if(stars[i].classList.contains('checked')){      
+            for(i; i < starsLength; i++) {
+              stars[i].classList.remove('checked')
+            }
+          } else {
+            for(i; i >= 0; i--) {
+              stars[i].classList.add('checked')
+            }
+          }
+
+          Swal.fire({
+            title: 'Thanks!',
+            text: "You've Successfully Rated This Book.",
+            icon: 'success',
+            background: '#f5f5f5',
+          })
         }
-      } else {
-        for(i; i >= 0; i--) {
-          stars[i].classList.add('checked');
-        }
-      };
+      });
     });
   });
-}
-
-*/
+};
 

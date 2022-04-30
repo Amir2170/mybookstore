@@ -21,13 +21,23 @@
                 <li class="text" class="purple">{{ book.text|title }}</li>
                 <li class="rate">
                     <p class="purple">Have You Read This Book?</p>
-                    <div class="book-rating">
-                        <span class="fa fa-star fa-3x {% if book.average_review > 0 %}checked{% endif %}"></span>
-                        <span class="fa fa-star fa-3x {% if book.average_review > 1 %}checked{% endif %}"></span>
-                        <span class="fa fa-star fa-3x {% if book.average_review > 2 %}checked{% endif %}"></span>
-                        <span class="fa fa-star fa-3x {% if book.average_review > 3 %}checked{% endif %}"></span>
-                        <span class="fa fa-star fa-3x {% if book.average_review > 4 %}checked{% endif %}"></span>
-                    </div>
+                    <form action="#" method="" class="book-rating">
+                        <button value="one">
+                            <i class="fa fa-star fa-3x {% if book.average_review > 0 %}checked{% endif %}"></i>
+                        </button>
+                        <button value="two">
+                            <i class="fa fa-star fa-3x {% if book.average_review > 0 %}checked{% endif %}"></i>
+                        </button>
+                        <button value="three">
+                            <i class="fa fa-star fa-3x {% if book.average_review > 0 %}checked{% endif %}"></i>
+                        </button>
+                        <button value="four">
+                            <i class="fa fa-star fa-3x {% if book.average_review > 0 %}checked{% endif %}"></i>
+                        </button>
+                        <button value="five">
+                            <i class="fa fa-star fa-3x {% if book.average_review > 0 %}checked{% endif %}"></i>
+                        </button>
+                    </form>
                 </li>
                 <li class="download">
                     <a href="#" class="download">Download</a>
@@ -47,11 +57,11 @@
                         {{ book|index:similar_books }} / {{ similar_books|length }}
                     </div>
                     <div class="book-img">
-                        <a href="#"></a> <!-- Link to the Book details -->
+                        <a href="{% url 'home:book-detail' book.slug %}"></a> <!-- Link to the Book details -->
                         <img src="{{ book.image.url }}">
                     </div>
                     <div class="book-title">
-                        <a href="#">{{ book.title|title }}</a>
+                        <a href="{% url 'home:book-detail' book.slug %}">{{ book.title|title }}</a>
                     </div>
                     <div class="text">
                         {{ book.text|title }}
