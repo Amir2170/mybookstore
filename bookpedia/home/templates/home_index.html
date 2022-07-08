@@ -4,7 +4,6 @@
 {% load static %}
 
 
-
 <!--CATEGORY SECTION-->
 
 {% block categories%}
@@ -22,8 +21,20 @@
     {% for book in books %}
         <div class="book">
             <div class="book-img">
-                <a href="#" class="add">{% translate "ADD TO FAVORITE" %}</a>
-                <img src="{{ book.image.url }}" alt="{{ book.title|title }}">
+                <!--Turned the link into a form with hidden fields so i can send POST request-->
+                {% if book in usr_favs %}
+                    <form action="{% url 'favorites:remove-book' book.slug %}" method="post" class="rmv-fav-form">
+                        {% csrf_token %}
+                        <button class="remove">REMOVE FROM FAVORITES</button>
+                    </form>                
+                {% else %}
+                    <form action="{% url 'favorites:add-book' book.slug %}" method="post" class="add-fav-form">
+                        {% csrf_token %}
+                        <button class="add">ADD TO FAVORITES</button>
+                    </form>
+                {% endif %}
+                <!--<a href="{% url 'favorites:add-book' book.slug %}" class="add">{% translate "ADD TO FAVORITE" %}</a>-->
+                <a href="{% url 'home:book-detail' book.slug %}" class="book-img-link"><img src="{{ book.image.url }}" alt="{{ book.title|title }}"></a>
             </div>
             <div class="book-title">
                 <a href="{% url 'home:book-detail' book.slug %}">{{ book.title|title }}</a>
@@ -37,6 +48,23 @@
             </div>
         </div>
     {% endfor %}
+    <!--page pagination for books-->
+    <div class="pagination">
+        <span class="step-links">
+            <!--if page has previous show previos arrow else not-->
+            {% if books.has_previous %}
+                <a href="?page={{ books.previous_page_number }}">&laquo;</a>
+            {% endif %}
+            <!--page numbers from 1 to last page number in order-->
+            {% for num_page in books.paginator.page_range %}
+                <a href="?page={{ num_page }}" class="page-nums">{{ num_page }}</a>
+            {% endfor %}
+            <!--if page has next show next arrow else not-->
+            {% if books.has_next %}
+                <a href="?page={{ books.next_page_number }}">&raquo;</a>
+            {% endif%}
+        </span>
+    </div>
 {% endblock books%}
 
 <!--BOOK RECOMMENDING SLIDESHOW SECTION-->
@@ -48,8 +76,7 @@
                 {{ book|index:recommended_books }} / {{ recommended_books|length }}
             </div>
             <div class="book-img">
-                <a href="{% url 'home:book-detail' book.slug %}"></a> <!-- Link to the Book details -->
-                <img src="{{ book.image.url }}">
+                <a href="{% url 'home:book-detail' book.slug %}" class="book-img-link"><img src="{{ book.image.url }}" alt="{{ book.title|title }}"></a>
             </div>
             <div class="book-title">
                 <a href="{% url 'home:book-detail' book.slug %}">{{ book.title|title }}</a>
@@ -70,3 +97,10 @@
 {% endblock book_recommending_dot%}
 
 
+<!--MODAL LOGIN FORM-->
+
+{% block auth_modal_errors %}
+    {% if form.non_field_errors %} 
+        <p>{{ form.non_field_errors }}</p>
+    {% endif %}
+{% endblock %}

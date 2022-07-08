@@ -9,6 +9,7 @@ from django.db.models import Avg
 from django.urls import reverse
 
 
+
 # MY IMPORTS
 from rating.models import Review
 

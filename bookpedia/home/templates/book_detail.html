@@ -20,27 +20,40 @@
                 <li class="author"><span  class="purple">Author: </span>{{ book.author|title }}</li>
                 <li class="text" class="purple">{{ book.text|title }}</li>
                 <li class="rate">
-                    <p class="purple">Have You Read This Book?</p>
-                    <form action="#" method="" class="book-rating">
-                        <button value="one">
+                    <p class="purple">Have You Read This Book? Rate It Then.</p>
+                    <form action="{% url 'review:rate' book.slug %}" method="post" class="book-rating">
+                        {% csrf_token %}
+                        <button value="one" name="one">
                             <i class="fa fa-star fa-3x {% if book.average_review > 0 %}checked{% endif %}"></i>
                         </button>
-                        <button value="two">
-                            <i class="fa fa-star fa-3x {% if book.average_review > 0 %}checked{% endif %}"></i>
+                        <button value="two" name="two">
+                            <i class="fa fa-star fa-3x {% if book.average_review > 1 %}checked{% endif %}"></i>
                         </button>
-                        <button value="three">
-                            <i class="fa fa-star fa-3x {% if book.average_review > 0 %}checked{% endif %}"></i>
+                        <button value="three" name="three">
+                            <i class="fa fa-star fa-3x {% if book.average_review > 2 %}checked{% endif %}"></i>
                         </button>
-                        <button value="four">
-                            <i class="fa fa-star fa-3x {% if book.average_review > 0 %}checked{% endif %}"></i>
+                        <button value="four" name="four">
+                            <i class="fa fa-star fa-3x {% if book.average_review > 3 %}checked{% endif %}"></i>
                         </button>
-                        <button value="five">
-                            <i class="fa fa-star fa-3x {% if book.average_review > 0 %}checked{% endif %}"></i>
+                        <button value="five" name="five">
+                            <i class="fa fa-star fa-3x {% if book.average_review > 4 %}checked{% endif %}"></i>
                         </button>
                     </form>
                 </li>
-                <li class="download">
-                    <a href="#" class="download">Download</a>
+                <li class="buttons"> <!--Download area-->
+                    <a href="{% url 'home:book-download' book.slug %}" class="download-btn buttons">Download</a> <!--Link here sends get request to download a book-->
+                    <!-- if book is in user favorites show remove btn otherwise show add btn-->
+                    {% if book in usr_favs %}
+                        <form action="{% url 'favorites:remove-book' book.slug %}" method="post" class="rmv-fav-form">
+                            {% csrf_token %}
+                            <button class="rmv-fav-btn buttons">Remove From Favorites</button> <!--But overall form is for adding a book to favorites using POST request-->
+                        </form>           
+                    {% else %}
+                        <form action="{% url 'favorites:add-book' book.slug %}" method="post" class="add-fav-form">
+                            {% csrf_token %}
+                            <button class="add-fav-btn buttons">Add To Favorites</button> <!--But overall form is for adding a book to favorites using POST request-->
+                        </form>
+                    {% endif %}
                 </li>
             </ul>
         </div>
@@ -48,7 +61,7 @@
 {% endblock book_detail%}
 
 {% block similar_books %}
-    <h2>Smilar Books</h2>
+    <h2>Similar Books</h2>
     <section class="recommend">
         <div class="slideshow-container">
             {% for book in similar_books %}
@@ -57,8 +70,7 @@
                         {{ book|index:similar_books }} / {{ similar_books|length }}
                     </div>
                     <div class="book-img">
-                        <a href="{% url 'home:book-detail' book.slug %}"></a> <!-- Link to the Book details -->
-                        <img src="{{ book.image.url }}">
+                        <a href="{% url 'home:book-detail' book.slug %}" class="book-img-link"><img src="{{ book.image.url }}" alt="{{ book.title|title }}"></a>
                     </div>
                     <div class="book-title">
                         <a href="{% url 'home:book-detail' book.slug %}">{{ book.title|title }}</a>

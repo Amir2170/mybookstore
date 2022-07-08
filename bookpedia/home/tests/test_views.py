@@ -2,9 +2,13 @@ from unicodedata import category, name
 from django.test import TestCase
 from urllib import response
 from xmlrpc import client
+from matplotlib import image
+from matplotlib.ft2font import BOLD
 from matplotlib.pyplot import cla, title
 from django.urls import reverse
+from django.core.files.uploadedfile import SimpleUploadedFile
 import tempfile
+
 
 #MY IMPORTS
 from ..models import Book, Category
@@ -13,27 +17,27 @@ from ..models import Book, Category
 class HomeViewtest(TestCase):
     
     def setUp(self):
-        photo = tempfile.NamedTemporaryFile(suffix=".jpg").name # Create an image as a temporary file
+        self.photo = tempfile.NamedTemporaryFile(suffix=".jpg").name # Create an image as a temporary file
         self.book1 = Book.objects.create(
             title="book1",
             recommend=True,
-            image=photo
+            image=self.photo,
         )
         self.book2 = Book.objects.create(
             title="book2",
-            image=photo
+            image=self.photo,
         )
         Book.objects.create(
             title="book3",
-            image=photo
+            image=self.photo,
         )
         Book.objects.create(
             title="book4",
-            image=photo
+            image=self.photo,
         )
         Book.objects.create(
             title="book5",
-            image=photo
+            image=self.photo,
         )
 
 
@@ -113,6 +117,21 @@ class HomeViewtest(TestCase):
             categories,
             ordered=False
         )
+
+    
+    def test_page_pagination_sends_only_6_books_to_template(self):
+        # first create more books  
+        for i in range(6, 12):
+            Book.objects.create(
+                title=f"book{i}",
+                image=self.photo,
+            )
+
+        response = self.client.get(reverse('home:index') + '?page=2')
+
+        # test page number is correct; page pagination works(it's a bit overkill; i know!)
+        self.assertEqual(response.context['books'].number, 2) 
+
 
 
 class BookDetailView(TestCase):
@@ -207,4 +226,30 @@ class BookDetailView(TestCase):
             response.context['similar_books'],
             similar_books,
             ordered=False
+        )
+
+
+
+class BookDownloadViewTest(TestCase):
+
+    def setUp(self):
+        file = SimpleUploadedFile( # Create a simple pdf file and associate it with created object
+            'book1',
+            b'hello world!',
+            'application/pdf', 
+        )
+        photo = tempfile.NamedTemporaryFile(suffix=".jpg").name # Create an image as a temporary file
+        self.book1 = Book.objects.create(
+            title="book1",
+            image=photo,
+            file=file,
+        )
+
+    
+    def test_downloading_a_file_has_no_problem(self):
+        response = self.client.get(reverse('home:book-download', args=[self.book1.slug]))
+
+        self.assertEqual(
+            response.get('Content-Disposition'),
+            'attachment; filename="book1.pdf"'
         )

@@ -33,12 +33,14 @@
     margin: 3%;
 }
 
+
 /* Because this app uses uses English as main language
    there is a padding right to this part */
 .info .purple{ 
     padding-right: 2%;
     color: #4D4C7D;
 }
+
 
 .book-info .info .text {
     line-height: 2;
@@ -54,7 +56,7 @@
     cursor: pointer;
 }
 
-.book-info .info .download {
+.book-info .info .buttons {
     text-align: center;
     margin-top: 5%;
     font-size: 1.5rem;
@@ -63,27 +65,54 @@
     color: rgb(255, 255, 255);
 }
 
-.info .download a:link {
+/* Add to favorites button */
+.info .buttons .add-fav-btn {
+    border: none;
+    cursor: pointer;
     background-color: #051367;
 }
 
-.info .download a:visited {
+/* Remove from favorites button */
+.info .buttons .rmv-fav-btn {
+    border: none;
+    cursor: pointer;
+    background-color: #f13737;
+}
+
+.info .buttons a:link {
+    background-color: #051367;
+}
+
+.info .buttons button:visited,
+.info .buttons a:visited {
     border-bottom: none;
 }
 
-.info .download a:focus {
-    border: 2px dotted rgb(255, 255, 255);
-}
-
-.info .download a:hover {
+.info .buttons button:focus,
+.info .buttons a:focus {
     border-bottom: none;
     background-color: #ECECEC;
     color: rgb(0, 0, 0);
 }
 
-.info .download a:active {
+.info .buttons button:hover,
+.info .buttons a:hover {
+    border-bottom: none;
+    background-color: #ECECEC;
+    color: rgb(0, 0, 0);
+}
+
+.info .buttons button:active,
+.info .buttons a:active {
     color: #04293A;
     box-shadow: inset 0 0.1rem 0.3rem rgba(0, 0, 0);
+}
+
+/* Here i had to make form and download button INLINE in order to be able to show
+   them side by side */
+.download-btn, 
+.info form {
+    display: inline;
 }
 
 /* Explore More aka Similar books */

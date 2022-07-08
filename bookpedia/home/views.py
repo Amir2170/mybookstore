@@ -1,6 +1,6 @@
-from cgitb import html
-from unicodedata import category
 from django.shortcuts import render
+from django.http import FileResponse
+from django.core.paginator import Paginator
 import random
 
 # MY IMPORTS
@@ -11,7 +11,14 @@ from home.models import Book, Category
 #Home Page
 
 def home(request):
-    books = Book.objects.all()
+    # page pagination; put 6 books per page
+    all_books = Book.objects.order_by('text')
+    paginator = Paginator(all_books, 6)
+
+    page_number = request.GET.get('page')
+
+    # get books for specified page in get request
+    books = paginator.get_page(page_number)
     
     recom_books = Book.objects.filter(recommend=True) #Recommended Books
     if not recom_books:
@@ -54,3 +61,16 @@ def book_detail(request, slug):
 
 def book_category(request, slug):
     pass
+
+
+# Downlaoding a book
+
+def book_download(request, slug):
+    
+    book = Book.objects.get(slug=slug)
+
+    return FileResponse(
+        open(book.file.path, 'rb'),
+        as_attachment=True,
+        filename=book.slug + '.pdf'
+    )

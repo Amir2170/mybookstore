@@ -185,7 +185,8 @@ header .navbar {
 
 /* This is Sign in key and it's hover state */
 
-.dropdown-menu .sign-in {
+.dropdown-menu .sign-in,
+.dropdown-menu .log-out {
   display: inherit;
   width: 100%;
   text-align: center;
@@ -195,7 +196,8 @@ header .navbar {
   margin-bottom: 0.6em;
 }
 
-.dropdown-menu .sign-in:hover {
+.dropdown-menu .sign-in:hover,
+.dropdown-menu .log-out:hover {
   border-bottom: none;
   background-color: #FE7E6D;
   color: #04293A;
@@ -245,6 +247,7 @@ header .navbar {
 .logo-bar h2 a:visited {
   color: #04293A;
 }
+
 
 .logo-bar h2 a:hover, .logo-bar .logo-img:hover, .saved li:nth-child(1) a{
   border-bottom: none;
@@ -348,7 +351,7 @@ main .quote {
   grid-area: books;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-evenly;
   min-height: 100vh;
 }
 
@@ -538,7 +541,7 @@ aside h2, .books h2 { /* H2 font style and font size + general styles*/
 
 /* Section books */
 
-.books .book-img a:hover { /* removing border button when hovering over a book image */
+.books .book-img button:hover { /* removing border button when hovering over a book image */
   border-bottom: none;
 }
 
@@ -565,14 +568,24 @@ aside h2, .books h2 { /* H2 font style and font size + general styles*/
   height: 88%; 
 }
 
+/* turning book image to a link for better user experience 
+   removing default border bottom for links.
+   this is for both recommending and library parts.
+*/
+.book-img-link:hover,
+.book-img-link:focus {
+  border-bottom: none;
+}
+
 .book .book-title {
   text-align: center;
   margin-bottom: 1%;
 }
 
-/* Add To Favorite key */
+/* Add To Favorite and Remove from favorite buttons */
 
-.book .add {
+.book .add,
+.book .remove {
   position: absolute;
   text-align: center;
   width: 100%;
@@ -581,29 +594,42 @@ aside h2, .books h2 { /* H2 font style and font size + general styles*/
   background-color: #051367;
   color: white;
   opacity: 0;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
   transition: opacity 0.25s ease-out;
 }
 
-.book:hover .add {
+/* Remove from favorite button */
+.book .remove {
+  background-color: #f13737;
+}
+
+.book:hover .add,
+.book:hover .remove {
   opacity: 1;
 }
 
 
-.add:visited {
+.add:visited,
+.remove:visited {
   border-bottom: none;
 }
 
-.add:focus {
+.add:focus,
+.remove:focus {
   border-bottom: none;
 }
 
-.add:hover {
+.add:hover,
+.remove:hover {
   border-bottom: none;
   background-color: #ECECEC;
   color: rgb(0, 0, 0);
 }
 
-.add:active {
+.add:active,
+.remove:active {
   color: #04293A;
   box-shadow: inset 0 0.1rem 0.3rem  rgb(0, 0, 0);
 }
@@ -651,4 +677,166 @@ footer .ft-cpright {
 
 footer .ft-cpright .copyright {
   font-size: 0.9rem;
+}
+
+
+/* Login Modal */
+
+/* The modal background */
+.modal-auth,
+.modal-user-create {
+  display: none;
+  position: fixed;
+  z-index: 15;
+  left: 0;
+  top: 0;
+  height: 100%; /* occupy the whole page */
+  width: 100%;
+  overflow: auto; /* Enable scrolling if needed */
+  background-color: rgba(0, 0, 0, 0.4); /* semi transparent for around modal */
+}
+
+/* Modal content */
+.modal-content {
+  position: relative;
+  background-color: rgb(245, 245, 245);
+  border: 4px solid rgba(4, 41, 58, 0.6);
+  border-radius: 5px;
+  margin: 15% auto; /* 15% from top */
+  padding: 5%;
+  width: 33rem;
+}
+
+.modal-content input:invalid {
+  border: none;
+  outline: 2px solid rgb(235, 4, 4);
+}
+
+.modal-close {
+  position: absolute;
+  font-size: 1.6rem;
+  right: 6%;
+  top: 2%;
+}
+
+/* Additional info */
+
+.modal-info {
+  position: absolute;
+  font-size: 0.7rem;
+  top: 2%;
+  left: 6%;
+}
+
+
+.modal-info .astrisk {
+  font-size: 1.7rem;
+}
+
+.modal-close:hover {
+  cursor: pointer;
+  color: #FE7E6D;
+}
+
+.modal-close:active {
+  color: rgb(0, 0, 0);
+}
+
+.modal-content .control-group {
+  padding-bottom: 7%;
+  height: 100%;
+}
+
+
+.control-group .textinput {
+  font-size: 1.3rem;
+  background-color: rgb(245, 245, 245);
+  border: 2px solid rgba(4, 41, 58, 0.6);
+  border-radius: 5px;
+  box-shadow: none;
+  max-width: 100%;
+}
+
+
+/* Form submit button */
+.auth-button,
+.create-button {
+  font-size: 1.2rem;
+  padding: .625em 1.1em;
+  background-color: #7066e0;
+  color: rgb(245, 245, 245);
+  border: 0;
+  border-radius: 5px;
+  float: right; /* place it in right*/
+}
+
+.auth-button:hover,
+.create-button:hover {
+  background-image: linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,.1));;
+}
+
+.auth-button:focus,
+.create-button:focus {
+  box-shadow: 0 0 0 3px rgba(112,102,224,.5);
+  outline: 0;
+}
+
+/* modal errors */
+.modal-error {
+  display: none;
+  position: absolute;
+  top: -10rem;
+  left: 0;
+  color: rgb(235, 4, 4);
+  background-color: rgb(248, 204, 204);
+  border: 1px solid rgb(235, 4, 4);
+  border-radius: 5px;
+  text-align: center;
+  width: 32.5rem;
+}
+
+.modal-error .error-content {
+  padding: 1% 5%;
+  max-width: 100%;
+}
+
+/* PAGE PAGINATION */
+.pagination {
+  flex-basis: 100%;
+  align-self: flex-end;
+  text-align: center;
+  margin-bottom: 2%;
+}
+
+.pagination a {
+  padding: .7vh 1vw;
+}
+
+/* overriding default visited link style */
+.pagination a:visited {
+  color: #04293A;
+}
+
+.pagination a:hover { /* remove orange border bottom */
+  border-bottom: none;
+}
+
+.pagination a:hover:not(.active) {
+  color: #04293A;
+  background-color: #ddd;
+  border-radius: 5px;
+  border-bottom: none;
+}
+
+.pagination a:active:not(.active) {
+  color: #04293A;
+  background-color: rgb(129, 129, 129);
+  border-radius: 5px;
+  border-bottom: none;
+}
+
+.pagination a.active {
+  color: white;
+  background-color: #051367;
+  border-radius: 5px;
 }

@@ -14,5 +14,6 @@ app_name= 'home'
 urlpatterns = [
     path('', views.home, name='index'),
     path('books/<slug:slug>/', views.book_detail, name='book-detail'),
+    path('download/<slug:slug>', views.book_download, name='book-download'),
 ]
 

@@ -1,5 +1,7 @@
 {% load i18n %}
 {% load static %} 
+{% load crispy_forms_tags %}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -56,8 +58,12 @@
                     <a href="#" class="hov-elem">My account</a>
                     <img src="{% static 'svg/down-arrow.svg' %}" class="arrow-svg" alt="" width="13" height="13">
                     <div class="dropdown-menu myaccount" id="account-drop" hidden>
-                      <a href="#" class="sign-in">Sign In</a>
-                      <a href="#" class="create-account">Create An Account</a>
+                      {% if user.is_authenticated %}
+                        <a href="{% url 'accounts:logout' %}" class="log-out">Logout</a>
+                        {% else %}
+                        <a href="#" class="sign-in">Signin</a>
+                        <a href="#" class="create-account">Create An Account</a>
+                      {% endif %}
                       <div class="divider"></div>
                       <a href="#" class="manage-account">Manage My Account</a>
                       <a href="#" class="usr-books">My Books</a>
@@ -66,10 +72,10 @@
                 </ul>
               </div>
               <div class="logo-bar">
-                <a href="#" class="logo-img">
+                <a href="{% url 'home:index' %}" class="logo-img">
                   <img src="{% static 'svg/book2.svg' %}" alt="" width="70" height="70">
                 </a>
-                <h2><a href="#">BookPedia</a></h2>
+                <h2><a href="{% url 'home:index' %}">BookPedia</a></h2>
                 <form class="searchbar" action="index.html" method="post">
                     <div class="search">
                       <input type="search" class="search-input"
@@ -400,6 +406,43 @@
             {% endblock similar_books %}
           </aside>
         </div>
+        <!--Login Form Modal-->
+        <div class="modal-auth">
+          <div class="modal-content">
+              <p class="modal-info"><em class="astrisk">*</em> :means mandatory fields, please fill them before submiting.</p>
+              <span class="modal-close">&times;</span>
+              <div class="modal-error">
+                <h2>Ooops...</h2>
+                <em><p class="error-content"></p></em>
+              </div>
+              <form class="auth-form" action="{% url 'accounts:login' %}" method="post">
+                  {% csrf_token %}
+                  {{ login_form|crispy }}
+                  <button class="auth-button">
+                      Login
+                  </button>
+              </form>
+            </div>
+        </div>
+
+        <!--User Creation Form-->
+        <div class="modal-user-create">
+          <div class="modal-content">
+            <p class="modal-info"><em class="astrisk">*</em> :means mandatory fields, please fill them before submiting.</p>
+            <span class="modal-close">&times;</span>
+            <div class="modal-error usr-creation-error">
+              <h2>Ooops...</h2>
+              <em><p class="error-content"></p></em>
+            </div>
+            <form class="user-creation-form" action="{% url 'accounts:user-creation' %}" method="post">
+              {% csrf_token %}
+              {{ user_creation_form|crispy }}
+              <button class="create-button">
+                  Submit
+              </button>
+            </form>
+          </div>
+        </div>
       </main>
       <footer>
         <div class="ft-legal">
@@ -428,5 +471,8 @@
         </div>
       </footer>
     </div>
+    <!--SWEETYFY AKA SWEETALERT2-->
+    {% load sweetify %}
+    {% sweetify %}
   </body>
 </html>

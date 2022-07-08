@@ -35,6 +35,10 @@ INSTALLED_APPS = [
     #Local
     'home',
     'rating',
+    'accounts',
+    'favorites',
+    'crispy_forms',
+    'sweetify',
     
     #Default
     'django.contrib.admin',
@@ -68,6 +72,9 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # Local Processors
+                'bookpedia.processors.auth_forms',
+                'favorites.processors.usr_favorites',
             ],
         },
     },
@@ -140,3 +147,14 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Login and Logout redirect url
+
+LOGIN_REDIRECT_URL ='/'
+
+LOGOUT_REDIRECT_URL = '/'
+
+# Sweetify library
+
+SWEETIFY_SWEETALERT_LIBRARY = 'sweetalert2'
