@@ -47,7 +47,7 @@
                         <form action="{% url 'favorites:remove-book' book.slug %}" method="post" class="rmv-fav-form">
                             {% csrf_token %}
                             <button class="rmv-fav-btn buttons">Remove From Favorites</button> <!--But overall form is for adding a book to favorites using POST request-->
-                        </form>           
+                        </form>
                     {% else %}
                         <form action="{% url 'favorites:add-book' book.slug %}" method="post" class="add-fav-form">
                             {% csrf_token %}
@@ -76,13 +76,13 @@
                         <a href="{% url 'home:book-detail' book.slug %}">{{ book.title|title }}</a>
                     </div>
                     <div class="text">
-                        {{ book.text|title }}
+                        {{ book.text|title|truncatewords:"10" }}
                     </div>
                 </div>
             {% empty %} <!--no similar books case-->
                 <p class="empty">Sorry, There Isn't Any Similar Books Available.</p>
             {% endfor %}
-            
+
             {% if similar_books %} <!--In case of no similar books no need to show these-->
                 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
                 <a class="next" onclick="plusSlides(1)">&#10095;</a>

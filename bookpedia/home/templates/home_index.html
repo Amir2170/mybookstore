@@ -1,8 +1,18 @@
 {% extends 'home.html' %}
-{% load i18n %} 
+{% load i18n %}
 {% load list_index %}
 {% load static %}
 
+
+<!-- UUSER ACCOUNTS-->
+
+{% block user_accounts %}
+    {% if user.is_authenticated %}
+       Welcome, {{ user.get_username }}
+    {% else %}
+        My Account
+    {% endif %}
+{% endblock user_accounts %}
 
 <!--CATEGORY SECTION-->
 
@@ -26,7 +36,7 @@
                     <form action="{% url 'favorites:remove-book' book.slug %}" method="post" class="rmv-fav-form">
                         {% csrf_token %}
                         <button class="remove">REMOVE FROM FAVORITES</button>
-                    </form>                
+                    </form>
                 {% else %}
                     <form action="{% url 'favorites:add-book' book.slug %}" method="post" class="add-fav-form">
                         {% csrf_token %}
@@ -37,7 +47,7 @@
                 <a href="{% url 'home:book-detail' book.slug %}" class="book-img-link"><img src="{{ book.image.url }}" alt="{{ book.title|title }}"></a>
             </div>
             <div class="book-title">
-                <a href="{% url 'home:book-detail' book.slug %}">{{ book.title|title }}</a>
+                <a href="{% url 'home:book-detail' book.slug %}">{{ book.title|title|linebreaksbr }}</a>
             </div>
             <div class="book-rating">
                 <span class="fa fa-star {% if book.average_review > 0 %}checked{% endif %}"></span>
@@ -82,7 +92,7 @@
                 <a href="{% url 'home:book-detail' book.slug %}">{{ book.title|title }}</a>
             </div>
             <div class="text">
-                {{ book.text|title }}
+                {{ book.text|title|truncatewords:"40" }}
             </div>
         </div>
     {% endfor %}
@@ -100,7 +110,7 @@
 <!--MODAL LOGIN FORM-->
 
 {% block auth_modal_errors %}
-    {% if form.non_field_errors %} 
+    {% if form.non_field_errors %}
         <p>{{ form.non_field_errors }}</p>
     {% endif %}
 {% endblock %}

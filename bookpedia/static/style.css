@@ -395,8 +395,8 @@ aside h2, .books h2 { /* H2 font style and font size + general styles*/
   padding: 5.5vh;
   padding-left: 0;
   min-height: 18vh; /* Should not be smaller than this */
-  height: 12%; /* Gave this part using % to make header and their 
-                adjacet container and occupy 100% of their section/aside 
+  height: 12%; /* Gave this part using % to make header and their
+                adjacet container and occupy 100% of their section/aside
                 and this causes the section and aside to have same height */
 }
 
@@ -449,7 +449,7 @@ aside h2, .books h2 { /* H2 font style and font size + general styles*/
   right: 0; /* putting next button far right */
 }
 
-.recommend .prev:hover, 
+.recommend .prev:hover,
 .recommend  .next:hover { /* Add a grey background on hover */
   color: white;
   background-color: rgba(0, 0, 0, 0.5);
@@ -494,12 +494,12 @@ aside h2, .books h2 { /* H2 font style and font size + general styles*/
   width: 100%;
 }
 
-/* There is a reason i put active class after dot class and it 
-   is because of specificity so keep this order it's IMPORTANT 
-   although i could use '!important' but it's considered bad 
+/* There is a reason i put active class after dot class and it
+   is because of specificity so keep this order it's IMPORTANT
+   although i could use '!important' but it's considered bad
    practise.
 */
-.dot { 
+.dot {
   cursor: pointer;
   height: 15px;
   width: 15px;
@@ -510,7 +510,7 @@ aside h2, .books h2 { /* H2 font style and font size + general styles*/
 }
 
 .active { /* For When a thumbnail dot get its corresponding image */
-  background-color: rgba(0, 0, 0, 1); 
+  background-color: rgba(0, 0, 0, 1);
 }
 
 .recommend .dot:hover {
@@ -525,7 +525,7 @@ aside h2, .books h2 { /* H2 font style and font size + general styles*/
 
 /* Fading Animation for slideshow */
 
-.fade { 
+.fade {
   animation-name: fade;
   animation-duration: 1.5s;
 }
@@ -557,7 +557,7 @@ aside h2, .books h2 { /* H2 font style and font size + general styles*/
   margin: 4vh 2.5vw 4vh 3vw;
   border: 1px solid rgba(4, 41, 58, 0.6);
   border-radius: 5px;
-  max-height: 382px;
+  max-height: 26rem;
 }
 
 .books .container { /* in order to give some space between books and their header */
@@ -565,10 +565,10 @@ aside h2, .books h2 { /* H2 font style and font size + general styles*/
   padding-bottom: 3vh;
   border: 4px solid #ECECEC;
   background-color: rgb(245, 245, 245);
-  height: 88%; 
+  height: 88%;
 }
 
-/* turning book image to a link for better user experience 
+/* turning book image to a link for better user experience
    removing default border bottom for links.
    this is for both recommending and library parts.
 */
@@ -589,7 +589,7 @@ aside h2, .books h2 { /* H2 font style and font size + general styles*/
   position: absolute;
   text-align: center;
   width: 100%;
-  bottom: 15.5%;
+  bottom: 22%;
   padding: 5%;
   background-color: #051367;
   color: white;
@@ -748,7 +748,8 @@ footer .ft-cpright .copyright {
 }
 
 
-.control-group .textinput {
+.control-group .textinput,
+.control-group .emailinput {
   font-size: 1.3rem;
   background-color: rgb(245, 245, 245);
   border: 2px solid rgba(4, 41, 58, 0.6);
@@ -839,4 +840,51 @@ footer .ft-cpright .copyright {
   color: white;
   background-color: #051367;
   border-radius: 5px;
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 1400px) {
+
+  html {
+    font-size: 15px;
+  }
+
+  main .container {
+    grid-template-rows: 0.9fr 3fr;
+  }
+
+  /* give some space between left edge of
+     screen and header */
+  aside h2 {
+    padding-left: 1vw;
+  }
+
+  /* squash books together and tweak books
+     containers size */
+  .books .book {
+    margin: 3.5vh .5vw 4vh 3vw;
+    max-height: 22.5rem;
+  }
+
+  .books .book-img img {
+    height: 17rem;
+  }
+
+  /* postioning the recommended book */
+  .recommend .book {
+    padding-top: 12%;
+  }
+
+  /* positioning the add to/ remove from
+     favorites button */
+  .book .add, .book .remove {
+    bottom: 24%;
+  }
+
+  /* positioning next and previous bottom of
+     recommending section */
+  .recommend .next, .recommend .prev {
+    top: 22%;
+  }
 }

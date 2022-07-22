@@ -36,7 +36,7 @@
 
 /* Because this app uses uses English as main language
    there is a padding right to this part */
-.info .purple{ 
+.info .purple{
     padding-right: 2%;
     color: #4D4C7D;
 }
@@ -110,7 +110,7 @@
 
 /* Here i had to make form and download button INLINE in order to be able to show
    them side by side */
-.download-btn, 
+.download-btn,
 .info form {
     display: inline;
 }
@@ -134,4 +134,20 @@
 .book-rating button {
     border: none;
     background-color: inherit;
+}
+
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 1400px) {
+
+  /* making download and add to favs buttons font-size
+     smaller in order for them to stay side by side */
+  .book-info .info .buttons {
+    font-size: 1.4rem;
+  }
+
+  .recommend .book {
+    padding-top: 5%;
+  }
 }

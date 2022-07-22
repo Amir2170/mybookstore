@@ -35,7 +35,7 @@ class LoginViewTest(TestCase):
             'username': 'testuser1', #invalid username
             'password': 'testpass',
         })
- 
+
         self.assertJSONEqual(
             response.content.decode('utf8'),
             {"__all__": ["Please enter a correct username and password. "
@@ -53,8 +53,8 @@ class LoginViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn('_auth_user_id', self.client.session)
 
-    
-    
+
+
 
 
 
@@ -71,7 +71,7 @@ class LoginViewTest(TestCase):
 #            title="book2",
 #            image=photo
 #        )
-    
+
 
 #    def test_cutom_login_view_sends_recommended_books_to_template_in_context(self):
 #        response = self.client.get(reverse('accounts:login'))
@@ -83,7 +83,7 @@ class LoginViewTest(TestCase):
 #            recom_books,
 #            ordered=False
 #        )
-    
+
     # Here i test bookpedia.processors file and check if it add login form to all contexes
 #    def test_if_auth_form_exists_in_all_views_context(self):
 #        response1 = self.client.get(reverse('home:index'))
@@ -107,7 +107,7 @@ class LoginViewTest(TestCase):
 #        )
 #        self.assertRedirects(response, reverse('home:index'))
 
-        
+
 
 class LogoutViewTest(TestCase):
 
@@ -128,7 +128,7 @@ class LogoutViewTest(TestCase):
 
 
 class UserCreationViewTest(TestCase):
-    
+
     def test_view_only_works_with_post_requests(self):
         response = self.client.get(reverse('accounts:user-creation'))
         self.assertEqual(response.status_code, 405)
@@ -137,6 +137,7 @@ class UserCreationViewTest(TestCase):
     def test_view_sends_form_errors_and_right_status_code_in_case_of_errors(self):
         response = self.client.post(reverse('accounts:user-creation'), data={
             'username': 'testuser',
+            'email': 'test@user.com',
             'password1': 'testpass1',
             'password2': 'testpass2',
         })
@@ -148,10 +149,11 @@ class UserCreationViewTest(TestCase):
 
         self.assertEqual(response.status_code, 400)
 
-    
+
     def test_view_creates_user_object_with_specified_details(self):
         response = self.client.post(reverse('accounts:user-creation'), data= {
             'username': 'testuser',
+            'email': 'test@user.com',
             'password1': 'testpass123',
             'password2': 'testpass123',
         })
@@ -160,10 +162,11 @@ class UserCreationViewTest(TestCase):
 
         self.assertEqual(response.status_code, 200)
 
-    
+
     def test_created_user_logs_in_afterward(self):
         response = self.client.post(reverse('accounts:user-creation'), data= {
             'username': 'testuser',
+            'email': 'test@user.com',
             'password1': 'testpass123',
             'password2': 'testpass123',
         })
@@ -180,7 +183,7 @@ class UserChangeViewTest(TestCase):
 
         self.assertEqual(response.status_code, 405)
 
- 
+
     def test_view_returns_400_status_code_in_case_of_invalid_data(self):
         response = self.client.post(reverse('accounts:user-change'))
 

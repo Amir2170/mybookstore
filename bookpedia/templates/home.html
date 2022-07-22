@@ -1,5 +1,5 @@
 {% load i18n %}
-{% load static %} 
+{% load static %}
 {% load crispy_forms_tags %}
 
 
@@ -7,6 +7,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,intial-scale=1">
     <script src="{% static 'javascript.js' %}" type="text/javascript" async></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11" async></script> <!--SweetAlert2 CDN-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,7 +21,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@1,600&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Source+Serif+Pro:ital,wght@1,600&display=swap" rel="stylesheet">  
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@700&family=Source+Serif+Pro:ital,wght@1,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!--Font Awesome icons-->
     <title>BookPedia</title>
     <link rel="stylesheet" href="{% static 'style.css' %}">
@@ -55,7 +56,7 @@
                 <ul class="nav-item-container justify-end" data-toggle-id="account-drop">
                   <li class="nav-item dropdown account hov-container">
                     <img src="{% static 'svg/account.svg' %}" class="account-svg" alt="" height="22" width="22">
-                    <a href="#" class="hov-elem">My account</a>
+                    <a href="#" class="hov-elem">{% block user_accounts %}{% endblock user_accounts%}</a>
                     <img src="{% static 'svg/down-arrow.svg' %}" class="arrow-svg" alt="" width="13" height="13">
                     <div class="dropdown-menu myaccount" id="account-drop" hidden>
                       {% if user.is_authenticated %}
@@ -126,7 +127,7 @@
             <div class="quote-text">
               {% block quote %}
                 <div class="quote-quote">
-                  “You have your way. I have my way. As for the right way,<br> the correct way, and the only way, it does not exist.” 
+                  “You have your way. I have my way. As for the right way,<br> the correct way, and the only way, it does not exist.”
                 </div>
                 <div class="quote-author">―Friedrich Wilhelm Nietzsche</div>
               {% endblock quote%}
@@ -351,11 +352,11 @@
                       </div>
                       <div class="text">
                         1
-                        The Gambler (Russian: Игрокъ, romanized: Igrok; modern spelling Игрок) 
-                        is a short novel by Fyodor Dostoevsky about a young tutor in the employment of a formerly 
-                        wealthy Russian general. The novella reflects Dostoevsky's own addiction to roulette, which 
-                        was in more ways than one the inspiration for the book: Dostoevsky completed the novella in 1866 under a 
-                        strict deadline to pay off gambling debts.[1] 
+                        The Gambler (Russian: Игрокъ, romanized: Igrok; modern spelling Игрок)
+                        is a short novel by Fyodor Dostoevsky about a young tutor in the employment of a formerly
+                        wealthy Russian general. The novella reflects Dostoevsky's own addiction to roulette, which
+                        was in more ways than one the inspiration for the book: Dostoevsky completed the novella in 1866 under a
+                        strict deadline to pay off gambling debts.[1]
                       </div>
                     </div>
                     <div class="book mySlides fade">
@@ -369,8 +370,8 @@
                       </div>
                       <div class="text">
                         2
-                        Beyond Good and Evil: Prelude to a Philosophy of the Future is a book by philosopher Friedrich Nietzsche 
-                        that covers ideas in his previous work Thus Spoke Zarathustra but with a more polemical approach. 
+                        Beyond Good and Evil: Prelude to a Philosophy of the Future is a book by philosopher Friedrich Nietzsche
+                        that covers ideas in his previous work Thus Spoke Zarathustra but with a more polemical approach.
                         It was first published in 1886 under the publishing house C. G.
                       </div>
                     </div>
@@ -385,7 +386,7 @@
                       </div>
                       <div class="text">
                         3
-                        Thus Spoke Zarathustra: A Book for All and None, also translated as Thus Spake Zarathustra, 
+                        Thus Spoke Zarathustra: A Book for All and None, also translated as Thus Spake Zarathustra,
                         is a work of philosophical fiction written by German philosopher Friedrich Nietzsche between 1883 and 1885.
                       </div>
                     </div>
